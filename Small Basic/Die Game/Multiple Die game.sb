@@ -1,0 +1,196 @@
+GraphicsWindow.Show()
+dingen()
+dice()
+
+Sub dingen 'De groottes en voorwaarden van de grafische weergave
+  GraphicsWindow.Height = 600
+  GraphicsWindow.Width = 600
+  GraphicsWindow.Top = 50
+  GraphicsWindow.Left = 300
+  GraphicsWindow.DrawText(100,50,"Enter the number of dice you want to throw(1-16): ") 
+  Numberinput = Controls.AddTextBox(410,47) 'de textbox waar je het nummer invoert hoeveel dobbelstenen te gooien
+  Controls.SetSize(Numberinput, 40,20)
+  button1 = Controls.AddButton("Throw", 275, 75)
+  button2 = Controls.AddButton("Ogen voorkant" 80, 548)
+  ogenvoorkant = Controls.AddTextBox(185, 550)
+  Controls.SetSize(ogenvoorkant, 40, 20)
+  button3 = Controls.AddButton("Ogen achterkant" 380, 548)
+  ogenachterkant = Controls.AddTextBox(497, 550)
+  Controls.SetSize(ogenachterkant, 40, 20)
+  button4 = Controls.AddButton("Reset", 550,10)
+  Controls.ButtonClicked = ButtonClick 'Dit gaat naar de subroutine als er geklikt wordt met de muis op een button
+  y = 150
+EndSub
+
+Sub dice 'De plaatjes laden van de dobbelstenen en in array Die opgeslagen
+   Die[1] = ImageList.LoadImage("C:\Users\Martijn\Desktop\Microsoft Basic\Multiple Die game\Die1.png")
+   Die[2] = ImageList.LoadImage("C:\Users\Martijn\Desktop\Microsoft Basic\Multiple Die game\Die2.png") 
+   Die[3] = ImageList.LoadImage("C:\Users\Martijn\Desktop\Microsoft Basic\Multiple Die game\Die3.png") 
+   Die[4] = ImageList.LoadImage("C:\Users\Martijn\Desktop\Microsoft Basic\Multiple Die game\Die4.png")
+   Die[5] = ImageList.LoadImage("C:\Users\Martijn\Desktop\Microsoft Basic\Multiple Die game\Die5.png")
+   Die[6] = ImageList.LoadImage("C:\Users\Martijn\Desktop\Microsoft Basic\Multiple Die game\Die6.png") 
+   Array.Setvalue(Die, 1, 1)'De plaatjes een waarde geven zodat hier later mee gerekend kan worden
+   Array.Setvalue(Die, 2, 2)
+   Array.Setvalue(Die, 3, 3)
+   Array.Setvalue(Die, 4, 4)
+   Array.Setvalue(Die, 5, 5)
+   Array.Setvalue(Die, 6, 6)
+EndSub
+
+Sub ButtonClick
+  button = Controls.LastClickedButton 'Registreert welke button als ''laatste'' wordt ingedrukt. 
+  If (button = button1)Then
+    Number = Controls.GetTextBoxText(Numberinput) 'Bij klik op button1 (Throw) wordt het ingevoerde nummer geregistreed en opgeslagen als variabele Number
+  doen()
+ElseIf (button = button2)Then
+  ogenvoor()
+Elseif (button = button3)Then
+  ogenachter()
+Elseif (button = button4)Then
+  Reset()
+EndIf
+EndSub
+
+Sub doen 'om te zorgen dat de dobbelstenen 4 rijen van 4 vormen (bij max 16)
+  If (Number < 5)Then
+    eersterij()
+  Elseif (Number > 4 and Number < 9)Then
+    tweederij()   
+  Elseif(Number > 8 and Number < 13)Then
+    derderij()
+  Elseif(Number > 12 and Number < 17)Then
+    vierderij()
+  Elseif(Number > 16)Then
+    Fool()
+    EndIf
+EndSub
+
+
+Sub eersterij
+  For i = 1 To Number
+      ogen[i] = Math.GetRandomNumber(6) 'De randomnumers, aantal ''i'' opgeslagen in array ogen
+      dice[i] = Shapes.AddImage(Die[ogen[i]]) 'dice 1t/m Number opgeslagen in array dice  
+      Shapes.Move(dice[i],150* i - 100, y) 'dice 1 t/m Number (array dice) worden naar hun plek gezet
+      Program.Delay(100)'Kleine delay voor een smooth overgang
+  EndFor
+EndSub
+  
+Sub tweederij
+  For i = 1 To 4 'eenmaal bij de tweede rij aangekomen is de eerste rij dus altijd gevuld met 4 dobbelstenen, en is dus niet afhankelijk van Number
+      ogen[i] = Math.GetRandomNumber(6)
+      dice[i] = Shapes.AddImage(Die[ogen[i]]) 
+      Shapes.Move(dice[i], 150*i - 100, y)
+      Program.Delay(100)   
+    Endfor
+ For i = 5 To Number  
+      ogen[i] = Math.GetRandomNumber(6)
+      dice[i] = Shapes.AddImage(Die[ogen[i]])    
+      Shapes.Move(dice[i],150* i - 700, y + 100)
+      Program.Delay(100)     
+Endfor
+EndSub
+
+Sub derderij
+   For i = 1 To 4 
+      ogen[i] = Math.GetRandomNumber(6)
+      dice[i] = Shapes.AddImage(Die[ogen[i]])
+      Shapes.Move(dice[i], 150*i - 100, y)
+      Program.Delay(100)   
+    Endfor
+     For i = 5 To 8
+      ogen[i] = Math.GetRandomNumber(6)
+      dice[i] = Shapes.AddImage(Die[ogen[i]])    
+      Shapes.Move(dice[i],150* i - 700, y + 100)
+      Program.Delay(100)     
+    Endfor
+     For i = 9 To Number  
+      ogen[i] = Math.GetRandomNumber(6)
+      dice[i] = Shapes.AddImage(Die[ogen[i]])    
+      Shapes.Move(dice[i],150* i - 1300, y + 200)
+      Program.Delay(100)     
+    Endfor
+  EndSub
+  
+  Sub vierderij
+     For i = 1 To 4 
+      ogen[i] = Math.GetRandomNumber(6)
+      dice[i] = Shapes.AddImage(Die[ogen[i]])
+      Shapes.Move(dice[i], 150*i - 100, y)
+      Program.Delay(100)   
+    Endfor
+     For i = 5 To 8
+      ogen[i] = Math.GetRandomNumber(6)
+      dice[i] = Shapes.AddImage(Die[ogen[i]])    
+      Shapes.Move(dice[i],150* i - 700, y + 100)
+      Program.Delay(100)     
+    Endfor
+     For i = 9 To 12  
+      ogen[i] = Math.GetRandomNumber(6)
+      dice[i] = Shapes.AddImage(Die[ogen[i]])    
+      Shapes.Move(dice[i],150* i - 1300, y + 200)
+      Program.Delay(100)     
+    Endfor
+    For i = 13 To Number  
+      ogen[i] = Math.GetRandomNumber(6)
+      dice[i] = Shapes.AddImage(Die[ogen[i]])    
+      Shapes.Move(dice[i],150* i - 1900, y + 300)
+      Program.Delay(100)     
+    Endfor
+  EndSub
+  
+  Sub ogenvoor 'Berekening ogen aan de voorkant
+    val = 0
+    For i = 1 To Number    
+      val = val + Array.GetValue(Die, ogen[i])  'value wordt gehaald uit array; Die en index ogen[i]. ogen[i] is op zijn beurt weer de array voor de randomnummers (die gelijk staat aan het aantal ogen)    
+    EndFor
+    Controls.SetTextBoxText(ogenvoorkant, val) 'wordt als text weergegeven eenmal op de button geklikt
+  EndSub  
+  
+  Sub ogenachter 'zelfde als ogenvoor alleen hier wordt met een kleine berekening (trueval) het aantal ogen op de achterkant berekend
+    val2 = 0
+    For i = 1 To Number 
+      val2 = val2 + Array.GetValue(Die, ogen[i])
+    EndFor
+    trueval = Number*7 - val2
+    Controls.SetTextBoxText(ogenachterkant, trueval)
+  EndSub
+  
+  Sub reset ''reset het programma zodat je opnieuw kan gooien
+    GraphicsWindow.Clear()
+    dingen()
+  EndSub
+    
+  Sub Fool
+    GraphicsWindow.Clear()
+    GraphicsWindow.ShowMessage("You are a fool", "Whoops!")
+    dingen()
+ EndSub
+    
+      
+    
+    
+
+  
+    
+  
+  
+  
+      
+   
+    
+
+    
+    
+  
+  
+  
+      
+
+
+
+
+ 
+
+
+
+  

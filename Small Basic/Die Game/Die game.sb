@@ -1,0 +1,31 @@
+Start1:
+TextWindow.WriteLine("The Die Game.")
+TextWindow.Write("Wanna play a Game?: ")
+If (TextWindow.Read() = "Yes") Then
+  Goto Start2
+Else 
+  Goto Start1
+EndIf
+Start2:
+x = Math.GetRandomNumber(6)
+TextWindow.WriteLine(x)
+If (x < 6) Then 
+  TextWindow.Write("Close one! Wanna roll again?: ")
+  If (TextWindow.Read() = "Yes") Then
+    Goto Start2
+  Else
+    TextWindow.WriteLine("You died.")
+    Program.Delay(1000)
+    TextWindow.Hide()
+  EndIf
+Else
+  TextWindow.WriteLine("Congratulations! You live.")
+  TextWindow.Write("Wanna play again? Type Yes (or No if you're a coward): ")
+  If (TextWindow.Read() = "Yes") Then
+    Goto Start2
+  Else
+    TextWindow.Hide()
+  EndIf
+EndIf
+
+    

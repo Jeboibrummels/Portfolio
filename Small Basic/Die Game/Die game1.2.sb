@@ -1,0 +1,243 @@
+'De positie van de grafische weergave.
+GraphicsWindow.Show()
+GraphicsWindow.Left = 350
+GraphicsWindow.Top = 65
+Wannaplay()
+
+Sub Wannaplay
+dingen() 'dingen voert nog niks uit maar stelt de voorwaarden aan de grafische weergave
+doen()  'zie sub doen
+EndSub
+
+Sub dingen
+  GraphicsWindow.Height = 600
+  GraphicsWindow.Width = 600
+  GraphicsWindow.Title = "The Die Game"
+  GraphicsWindow.FontSize = 56
+  GraphicsWindow.DrawText(10, 10, "Wanna play a game?")
+  GraphicsWindow.DrawRectangle(100, 100, 150, 50)
+  GraphicsWindow.DrawRectangle(350, 100, 150, 50)
+  GraphicsWindow.BrushColor = "Blue"
+  GraphicsWindow.FontSize = 32
+  GraphicsWindow.DrawBoundText(147, 105, 130, "Yes")
+  GraphicsWindow.DrawBoundText(403, 105, 130, "No")
+  GraphicsWindow.MouseDown = onmousedown 'subroutine wanneer er geklikt wordt met de muis
+  Not = "True=False;False=True;"
+  mouseDown = "False" 'Hier in dit gebied (van de code) is een muisklik "False"
+EndSub
+
+Sub onmousedown
+  'venster waarin geklikt moet worden met de muis voor "True"
+  x1 = GraphicsWindow.MouseX
+  y1 = GraphicsWindow.MouseY
+  If (x1 > 100 And x1 < 250 And y1 > 100 And y1 < 150)Then
+    mouseDown = "True" 'dus alleen binnen deze x- en y-waardes wordt de muisklik  "True"
+  ElseIf (x1 > 350 And x1 < 500 And y1 > 100 And y1 < 150)Then
+   mouseDown = "True" 
+  EndIf
+EndSub
+
+Sub doen
+  'wanneer er gelikt wordt, worden de buttons yes en no gevuld met een kleur en gaan ze door naar verschilende subroutintes.
+  'While "True"
+    While Not[mouseDown] 'Wanneer er niet geklikt worden blijft hij in deze loop (hij blijft dus ''wachten'')
+      Program.Delay(200)
+    EndWhile
+    If (x1 > 100 And x1 < 250 And y1 > 100 And y1 < 150)Then
+  GraphicsWindow.BrushColor = "Green"
+  GraphicsWindow.FillRectangle(100, 100, 150, 50)
+  GraphicsWindow.BrushColor = "Blue"
+  GraphicsWindow.DrawBoundText(147, 105, 130, "Yes")
+  Wannathrow()
+    ElseIf (x1 > 350 And x1 < 500 And y1 > 100 And y1 < 150)Then
+  GraphicsWindow.BrushColor = "Red"
+  GraphicsWindow.FillRectangle(350, 100, 150, 50)
+  GraphicsWindow.BrushColor = "Blue"
+  GraphicsWindow.DrawBoundText(403, 105, 130, "No")
+  close()
+    Endif
+  mouseDown = "False"
+  'EndWhile
+EndSub
+
+Sub Wannathrow
+  dingen2() 'Weer de grootte van het scherm en voorwaardes.
+  doen2()
+EndSub
+
+Sub dingen2
+  Program.Delay(500)
+  GraphicsWindow.Clear()
+  GraphicsWindow.DrawRectangle(100, 75, 400, 100)
+  GraphicsWindow.FontSize = 56
+  GraphicsWindow.DrawBoundText(205, 90, 200, "Throw")
+  GraphicsWindow.MouseDown = onmousedown2
+  Not = "True=False;False=True;"
+  mouseDown2 = "False"
+EndSub
+
+Sub onmousedown2
+    x2 = GraphicsWindow.MouseX
+    y2 = GraphicsWindow.MouseY
+  If (x2 > 100 And x2 < 400 And y2 > 75 And y2 < 175)Then
+    mouseDown2 = "True"
+  EndIf
+EndSub
+
+Sub doen2 'Knop wordt weer ingekleurd
+  'While "True"
+    While Not[mouseDown2]
+      Program.Delay(200)
+    EndWhile
+      If (x2 > 100 And x2 < 400 And y2 > 75 And y2 < 175)Then
+        GraphicsWindow.BrushColor = "Red"
+        GraphicsWindow.FillRectangle(100, 75, 400, 100)
+        GraphicsWindow.BrushColor = "Blue"
+        GraphicsWindow.DrawBoundText(205, 90, 200, "Throw")
+        mouseDown2 = "False"
+        throwen()
+     EndIf
+  'EndWhile
+EndSub
+  
+Sub throwen 'Dit is de subroutine voor het gooien van de dobbelstenen.
+  throwdoen()
+EndSub
+
+Sub throwdoen
+  Program.Delay(600)
+  GraphicsWindow.Clear()
+    For i = 1 To 10 'er wordt 10 keer gegooid zo krijg je het idee dat er gerold wordt.
+    x3 = Math.GetRandomNumber(6)
+      If (x3 = 1)Then 'grafische weergave voor dobbelsteen 1
+        GraphicsWindow.DrawRectangle(200, 300, 200, 200)
+        GraphicsWindow.DrawEllipse(290, 390, 20, 20)
+      EndIf
+      If (x3 = 2)Then 'grafische weergave voor dobbelsteen 2
+         GraphicsWindow.DrawRectangle(200, 300, 200, 200)
+         GraphicsWindow.DrawEllipse(240, 440, 20, 20)
+         GraphicsWindow.DrawEllipse(340, 340, 20, 20)
+      EndIf
+      If (x3 = 3)Then 'etc
+         GraphicsWindow.DrawRectangle(200, 300, 200, 200)
+         GraphicsWindow.DrawEllipse(240, 440, 20, 20)
+         GraphicsWindow.DrawEllipse(340, 340, 20, 20)
+         GraphicsWindow.DrawEllipse(290, 390, 20, 20)
+      EndIf
+      If (x3 = 4)Then
+         GraphicsWindow.DrawRectangle(200, 300, 200, 200)
+         GraphicsWindow.DrawEllipse(240, 440, 20, 20)
+         GraphicsWindow.DrawEllipse(340, 340, 20, 20)
+         GraphicsWindow.DrawEllipse(240, 340 ,20 ,20)
+         GraphicsWindow.DrawEllipse(340, 440, 20, 20)
+      EndIf
+      If (x3 = 5)Then
+         GraphicsWindow.DrawRectangle(200, 300, 200, 200)
+         GraphicsWindow.DrawEllipse(240, 440, 20, 20)
+         GraphicsWindow.DrawEllipse(340, 340, 20, 20)
+         GraphicsWindow.DrawEllipse(240, 340 ,20 ,20)
+         GraphicsWindow.DrawEllipse(340, 440, 20, 20)
+         GraphicsWindow.DrawEllipse(290, 390, 20 ,20)
+      EndIf
+      If (x3 = 6)Then
+         GraphicsWindow.DrawRectangle(200, 300, 200, 200)
+          GraphicsWindow.DrawEllipse(240, 440, 20, 20)
+          GraphicsWindow.DrawEllipse(340, 340, 20, 20)
+          GraphicsWindow.DrawEllipse(240, 340 ,20 ,20)
+          GraphicsWindow.DrawEllipse(340, 440, 20, 20)
+          GraphicsWindow.DrawEllipse(240, 390, 20, 20)
+          GraphicsWindow.DrawEllipse(340, 390, 20, 20)
+      EndIf
+    Program.Delay(120)
+    If (i < 10) Then '9 van de 10 keer dat gegooid wordt, wordt het grafisch venster weer gecleared zo krijg je het idee van een rollende dobbelsteen
+      GraphicsWindow.Clear()
+    EndIf
+    Program.Delay(10)
+    If (i = 10 And x3 < 6)Then 'bij de laatste worp gaat hij naar de volgende subroutine. Bij 1t/m5 hier wordt gevraagd of je opnieuw wil gooien
+      throwagain()
+    ElseIf (i = 10 and x3 = 6)Then 'hier is de worp dus 6 en heb je gewonnen. De subroutine win() sluit het venster
+      Win()
+      EndIf
+  EndFor
+EndSub
+
+Sub throwagain
+  Program.Delay(500)
+  throwagaindingen() 'grootte en voorwaardes
+  throwagaindoen()
+EndSub
+
+Sub throwagaindingen
+  GraphicsWindow.Height = 600
+  GraphicsWindow.Width = 600
+  GraphicsWindow.Clear()
+  GraphicsWindow.FontSize = 56
+  GraphicsWindow.BrushColor = "Red"
+  GraphicsWindow.DrawBoundText(150, 90, 400, "You Died...")
+  GraphicsWindow.FontSize = 40
+  GraphicsWindow.BrushColor = "Blue"
+  GraphicsWindow.DrawBoundText(100, 240, 600, "Wanna throw again?")
+  GraphicsWindow.FontSize = 32
+  GraphicsWindow.DrawRectangle(100, 450, 150, 50)
+  GraphicsWindow.DrawBoundText(147, 455, 130, "Yes")
+  GraphicsWindow.DrawRectangle(350, 450, 150, 50)
+  GraphicsWindow.DrawBoundText(403, 455, 130, "No")
+  GraphicsWindow.MouseDown = onmousedown3
+  mouseDown3 = "False"
+  Not = "True=False;False=True;"
+EndSub
+
+Sub onmousedown3
+  x4 = GraphicsWindow.MouseX
+  y4 = GraphicsWindow.MouseY  
+  If (x4 > 100 And x4 < 250 And y4 > 450 And y4 < 500)Then
+    mouseDown3 = "True"
+  ElseIf (x4 > 350 and x4 < 500 and y4 > 450 and y4 < 500)Then
+    mouseDown3 = "True"
+  EndIf
+EndSub
+
+Sub throwagaindoen
+  'While "True"  in het geval de code niet door moet lopen maar ''actief''' moet blijven in het geval de tweede knop ook ingedrukt moet worden
+    While Not[mouseDown3]
+      Program.Delay(200)
+    EndWhile
+    'Knop Yes en no ingekleurd  binnen bepaalde x- en y-waardes
+    If (x4 > 100 And x4 < 250 And y4 > 450 And y4 < 500)Then
+      GraphicsWindow.BrushColor = "Green"
+      GraphicsWindow.FillRectangle(100, 450, 150, 50)
+      GraphicsWindow.BrushColor = "Blue"
+      GraphicsWindow.DrawBoundText(147, 455, 130, "Yes")
+      throwdoen()
+      'Knop No
+    Elseif (x4 > 350 and x4 < 500 and y4 > 450 and y4 < 500)Then
+      GraphicsWindow.BrushColor = "Red"
+      GraphicsWindow.FillRectangle(350, 450, 150, 50)
+      GraphicsWindow.BrushColor = "Blue"
+      GraphicsWindow.DrawBoundText(403, 455, 130, "No")
+      close()
+    EndIf
+    mouseDown3 = "False"
+  'EndWhile
+EndSub
+
+Sub win
+  GraphicsWindow.FontSize = 56
+  GraphicsWindow.DrawText(185, 90, "You live")
+  close()
+EndSub
+
+Sub close 'sluit het venster
+  Program.Delay(700)
+  Program.End()
+EndSub
+
+
+      
+      
+      
+
+  
+ 
+  
+ 

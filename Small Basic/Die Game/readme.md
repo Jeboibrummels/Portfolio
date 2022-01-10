@@ -50,6 +50,8 @@ achter elkaar afgebeeld zodat het lijkt alsof de dobbelsteen daadwerkelijk gerol
 
 Bestand: Multiple Die Game.sb
 
+----WERKWIJZE----
+
 Er is hier wederom voor gekozen om een grafishce weergave te doen van de dobbelstenen. Dit keer zijn er images \
 van het internet gehaald en deze gebonden aan het aantal ogen van de random number generator. Er wordt ook \
 gebruik gemaakt van de LitDev library voor Small Basic omdat deze een aantal voordelen heeft. Deze heeft aanroepen \

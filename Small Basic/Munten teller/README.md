@@ -1,8 +1,7 @@
 # Munten teller
 
 De bedoeling van deze opdracht was om een muntenteller te maken die in gepast in zo \
-weinig mogelijk munten het ingevoerde bedrag kan weergeven. Ook de ze opdracht is gemaakt \
-in Small Basic
+weinig mogelijk munten het ingevoerde bedrag kan weergeven.
 
 
 Opdracht
@@ -15,6 +14,10 @@ Opdracht
 
 Werkwijze
 ---------
+
+Taal: Small Basic \
+Libraries: LitDev
+
 Bij dit porgrammaatje word gebruik gemaakt van de LitDev library voor Small Basic. \
 Als eerste heb ik een aantal images van euromunten gedownload. Deze worden in de code geload.\
 Er is een button waarop geklikt kan worden nadat er een bedrag is ingvoerd om door te gaan \
@@ -29,7 +32,7 @@ hoger is dan 99. Zo ja dan worden de munten en hun aantalen grafisch weergegeven
 er een pop up window dat het bedrag niet uitgerekend kan worden. \
 De weergave van de munten wordt zo gedaan dat wanneer er nooit onnodig veel ruimte zit tussen de munten. \
 De waarde van de hoogste munt van het te berekenen getal komt altijd op de eerst positie en de volgende \
-hoogste waarde komt altijd op de tweede positie.
+hoogste waarde komt altijd op de tweede positie. \
 De reset knop zorgt er voor dat de weergave van de munten verdwijnt en het invoervenster van het bedrag \
 weer leeg is zodat een nieuw getal ingevoerd kan worden. Ook zonder de reset knop kan een nieuw bedrag \
 ingevoerd worden en deze zal uitgerekend worden.

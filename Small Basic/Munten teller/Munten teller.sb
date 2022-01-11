@@ -1,0 +1,133 @@
+GraphicsWindow.Show()
+dingen()
+munten()
+
+Sub dingen
+  GraphicsWindow.Top = 50
+  GraphicsWindow.Left = 175
+  GraphicsWindow.Height = 600
+  GraphicsWindow.Width = 1000
+  GraphicsWindow.FontSize = 32
+  GraphicsWindow.DrawText(115,40, "Reken uit hoeveel en welke munten het bedrag is")
+  GraphicsWindow.FontSize = 24
+  GraphicsWindow.DrawText( 115, 130 "Voer hier het bedrag in. (In euro's):")
+  Numberinput = Controls.AddTextBox(608, 130)
+  Controls.SetSize(Numberinput, 120, 32)
+  button1 = Controls.AddButton("Bereken", 800, 126)
+  GraphicsWindow.FontSize = 16
+  button2 = Controls.AddButton("Reset", 10,10)
+  Controls.ButtonClicked = Buttonclicked
+EndSub
+
+Sub Buttonclicked
+  button = Controls.LastClickedButton
+  If (button = button1)Then
+    bedrag = Controls.GetTextBoxText(Numberinput)
+    berekening()
+  ElseIf (button = button2)Then
+    reset()
+  EndIf
+EndSub
+
+Sub munten
+  Munt[1] = ImageList.LoadImage("C:\Portfolio\Small Basic\Munten teller\Images\2euro.png")
+  Munt[2] = ImageList.LoadImage("C:\Portfolio\Small Basic\Munten teller\Images\1euro.png")
+  Munt[3] = ImageList.LoadImage("C:\Portfolio\Small Basic\Munten teller\Images\50cent.png")
+  Munt[4] = ImageList.LoadImage("C:\Portfolio\Small Basic\Munten teller\Images\20cent.png")
+  Munt[5] = ImageList.LoadImage("C:\Portfolio\Small Basic\Munten teller\Images\10cent.png")
+  Munt[6] = ImageList.LoadImage("C:\Portfolio\Small Basic\Munten teller\Images\5cent.png")
+  Munt[7] = ImageList.LoadImage("C:\Portfolio\Small Basic\Munten teller\Images\2cent.png")
+  Munt[8] = ImageList.LoadImage("C:\Portfolio\Small Basic\Munten teller\Images\1cent.png")
+Endsub
+
+Sub berekening
+  bedrag = bedrag*100
+  x1a = Math.Remainder(bedrag, 200)
+  xb[1] = Math.Floor(bedrag/200)
+  x2a = Math.Remainder(x1a, 100)
+  xb[2] = Math.Floor (x1a/100)
+  x3a = Math.Remainder(x2a,50)
+  xb[3] = Math.Floor(x2a/50)
+  x4a = Math.Remainder(x3a, 20)
+  xb[4] = Math.Floor(x3a/20)
+  x5a = Math.Remainder(x4a, 10)
+  xb[5] = Math.Floor (x4a/10)
+  x6a = Math.Remainder(x5a,5)
+  xb[6] = Math.Floor(x5a/5)
+  x7a = Math.Remainder(x6a, 2)
+  xb[7] = Math.Floor(x6a/2)
+  x8a = Math.Remainder(x7a, 1)
+  xb[8] = Math.Floor (x7a/1)
+  check()
+EndSub
+
+Sub check
+  If (xb[1] > 100000)Then
+      cannot()
+  ElseIf (xb[1] <= 99999)Then
+    doen()
+  EndIf    
+EndSub
+
+Sub doen
+  GraphicsWindow.FontSize = 32
+  x = 1 
+  y = 250
+  delta = 200
+  b = 50
+  c = 50
+  lenght = Text.GetLength(xb[1])
+  For i = 2 To lenght
+    c = c + 17
+  EndFor 
+  For i = 1 To 1
+    Euro[i] = Shapes.AddImage(Munt[i]) 
+    Aantal[i] = Shapes.AddText("x")
+    Text[i] = Shapes.AddText(xb[i]) 
+     If (xb[i] = 0)Then
+       Shapes.Remove(Euro[i]) 
+       Shapes.Remove(Aantal[i])
+       Shapes.Remove(Text[i])  
+     ElseIf(xb[i] > 0)Then
+      Shapes.Move(Euro[i], delta*x - b, y)
+      Shapes.Move(Aantal[i], delta*x - (b+25), y+25)
+      Shapes.Move(Text[i], delta*x - (c+65), y+25)
+      x = x + 1 
+     EndIf
+  EndFor
+  For i = 2 To 8
+    Euro[i] = Shapes.AddImage(Munt[i])  
+    Aantal[i] = Shapes.AddText("x")
+    Text[i] = Shapes.AddText(xb[i])
+     If (xb[i] = 0)Then
+       Shapes.Remove(Euro[i]) 
+       Shapes.Remove(Aantal[i])
+       Shapes.Remove(Text[i])  
+     ElseIf(xb[i] > 0)Then
+      Shapes.Move(Euro[i], delta*x - b, y)
+      Shapes.Move(Aantal[i], delta*x - (b+25), y+25)
+      Shapes.Move(Text[i], delta*x - (b+65), y+25)
+      x = x + 1 
+    EndIf
+    If (x = 5)Then
+     y = 400
+     b = 850
+   EndIf
+   EndFor 
+EndSub
+
+Sub reset
+   For i = 1 to 8
+      Shapes.Remove(Euro[i])
+      Shapes.Remove(Aantal[i])
+      Shapes.Remove(Text[i])
+    Endfor
+    dingen()
+EndSub
+   
+Sub cannot
+  GraphicsWindow.ShowMessage("Dit bedrag kan ik niet uitrekenen", "Whoops") 
+  dingen()
+EndSub
+
+  

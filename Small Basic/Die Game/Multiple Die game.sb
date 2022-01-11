@@ -52,6 +52,9 @@ EndIf
 EndSub
 
 Sub doen 'om te zorgen dat de dobbelstenen 4 rijen van 4 vormen (bij max 16)
+  For i = 1 To 16
+    Shapes.Remove(dice[i])
+  EndFor
   If (Number < 5)Then
     eersterij()
   Elseif (Number > 4 and Number < 9)Then

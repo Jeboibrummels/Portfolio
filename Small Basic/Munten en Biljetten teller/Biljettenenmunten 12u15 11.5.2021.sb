@@ -1,0 +1,401 @@
+GraphicsWindow.Show()
+fp = File.GetSettingsFilePath()
+  For i = Text.GetLength(fp) to 1 step - 1
+    If (Text.GetSubText(fp, i , 1) = "\") Then
+      pos = i
+      i = 1
+    EndIf
+  EndFor
+fp = Text.GetSubText(fp,1,pos)
+fp1 = fp + "sommen.ARR"
+fp2 = fp + "totaal.ARR"
+fp3 = fp + "gem.ARR"
+dingen1()
+
+Sub dingen1
+  GraphicsWindow.Height = 200
+  GraphicsWindow.Width = 425
+  GraphicsWindow.Top = 50
+  GraphicsWindow.Left = 175
+  wwin = Controls.AddTextBox(100,40)
+  Controls.SetSize(wwin, 100, 25)
+  button1 = Controls.AddButton("Inloggen" 250, 40)
+  Controls.ButtonClicked = Buttondown1
+  x = 0
+EndSub
+
+Sub Buttondown1
+  button =  Controls.LastClickedButton
+  If (button = button1 )Then
+    wwl = Controls.GetTextBoxText(wwin)
+    If (wwl <> "")Then
+      x = x + 1
+      ww[x] = Controls.GetTextBoxText(wwin)
+      Controls.SetTextBoxText(wwin, "")
+    EndIf
+    check()
+  EndIf
+EndSub
+
+Sub check
+  If (ww[x] = "Hallo126")Then
+    Shapes.Remove(wwin)
+    Shapes.Remove(button1)
+    Shapes.Remove(wrong1)
+    Shapes.Remove(wrong2)
+    dingen3()
+    muntenenbiljetten()
+  EndIf
+  If(ww[1] <> "Hallo126" And x = 1 )Then
+    GraphicsWindow.FontSize = 24
+    wrong1 = Shapes.AddText("Wrong password! Two tries left.")
+    shapes.Move(wrong1, 20, 90)
+  EndIf
+  if (ww[2] <> "Hallo126" And x = 2)Then
+    Shapes.Remove(wrong1)
+    wrong2 = Shapes.AddText("Wrong password! One try left.")
+    shapes.Move(wrong2, 20, 90)
+  EndIf 
+  If(ww[3] <> "Hallo126" And x = 3)Then
+    Program.Delay(600)
+    Program.End()
+  EndIf
+EndSub
+
+Sub dingen3
+  GraphicsWindow.FontSize = 12
+  GraphicsWindow.DrawText(1000, 90, "Totaal:")
+  totaal = Controls.AddTextBox(1100, 90)
+  Controls.SetSize(totaal, 80, 20)
+  Controls.SetTextBoxText(totaal, File.ReadContents(fp2))
+  GraphicsWindow.DrawText(1000, 130, "Gemiddelde:")
+  gemiddelde = Controls.AddTextBox(1100, 130)
+  Controls.SetSize(gemiddelde, 80, 20)
+  Controls.SetTextBoxText(gemiddelde,File.ReadContents(fp3))
+  GraphicsWindow.DrawText(1000, 50, "Aantal:")
+  aanjal = Controls.AddTextBox(1100, 50)
+  Controls.SetSize(aanjal, 80, 20)
+  Controls.SetTextBoxText(aanjal, File.ReadContents(fp1))
+  GraphicsWindow.DrawText(1000, 170, "Bedrag:")
+  bedragies = Controls.AddTextBox(1100, 170)
+  Controls.SetSize(bedragies, 80, 20)
+  sommen = Controls.GetTextBoxText(aanjal)
+  dingen2()
+EndSub
+
+Sub dingen2
+  GraphicsWindow.Top = -5
+  GraphicsWindow.Left = -10
+  GraphicsWindow.Height = 900
+  GraphicsWindow.Width = 1450
+  GraphicsWindow.FontSize = 32
+  GraphicsWindow.DrawText(115,40, "Reken uit hoeveel en welke biljetten het bedrag is")
+  GraphicsWindow.FontSize = 24
+  GraphicsWindow.DrawText( 115, 130 "Voer hier het bedrag in. (In euro's):")
+  Numberinput = Controls.AddTextBox(608, 130)
+  Controls.SetSize(Numberinput, 120, 32)
+  button2 = Controls.AddButton("Bereken", 800, 126)
+  GraphicsWindow.FontSize = 16
+  button3 = Controls.AddButton("Reset", 10,10)
+  Controls.ButtonClicked = Buttonclicked
+EndSub
+
+Sub Buttonclicked
+  button = Controls.LastClickedButton
+  If (button = button2)Then
+    Controls.SetTextBoxText(bedragies, "")
+    bedrag = Controls.GetTextBoxText(Numberinput) 
+    Controls.SetTextBoxText(bedragies, bedrag)
+    Controls.SetTextBoxText(Numberinput, "")
+    If (bedrag <> "")Then
+     For i = 1 to 7
+       Shapes.Remove(Euro[i])
+       Shapes.Remove(Aantal[i])
+       Shapes.Remove(Text[i])
+     Endfor
+     For l = 1 To 8
+       Shapes.Remove(Euros[l])
+       Shapes.Remove(Aantals[l])
+       Shapes.Remove(Texts[l])
+     EndFor
+  EndIf
+    checkmineen()
+    Controls.SetTextBoxText(aanjal, sommen)
+    sommen = Controls.GetTextBoxText(aanjal)
+    File.WriteContents(fp1, sommen) 
+  EndIf
+  If (button = button3)Then
+    reset()
+  EndIf
+EndSub
+
+Sub muntenenbiljetten
+  Biljet[1] = ImageList.LoadImage("C:\Portfolio\Small Basic\Munten en Biljetten teller\Images\500euro2.png")
+  Biljet[2] = ImageList.LoadImage("C:\Portfolio\Small Basic\Munten en Biljetten teller\Images\200euro2.png")
+  Biljet[3] = ImageList.LoadImage("C:\Portfolio\Small Basic\Munten en Biljetten teller\Images\100euro2.png")
+  Biljet[4] = ImageList.LoadImage("C:\Portfolio\Small Basic\Munten en Biljetten teller\Images\50euro2.png")
+  Biljet[5] = ImageList.LoadImage("C:\Portfolio\Small Basic\Munten en Biljetten teller\Images\20euro2.png")
+  Biljet[6] = ImageList.LoadImage("C:\Portfolio\Small Basic\Munten en Biljetten teller\Images\10euro2.png")
+  Biljet[7] = ImageList.LoadImage("C:\Portfolio\Small Basic\Munten en Biljetten teller\Images\5euro2.png")
+  Munt[1] = ImageList.LoadImage("C:\Portfolio\Small Basic\Munten en Biljetten teller\Images\2euro.png")
+  Munt[2] = ImageList.LoadImage("C:\Portfolio\Small Basic\Munten en Biljetten teller\Images\1euro.png")
+  Munt[3] = ImageList.LoadImage("C:\Portfolio\Small Basic\Munten en Biljetten teller\Images\50cent.png")
+  Munt[4] = ImageList.LoadImage("C:\Portfolio\Small Basic\Munten en Biljetten teller\Images\20cent.png")
+  Munt[5] = ImageList.LoadImage("C:\Portfolio\Small Basic\Munten en Biljetten teller\Images\10cent.png")
+  Munt[6] = ImageList.LoadImage("C:\Portfolio\Small Basic\Munten en Biljetten teller\Images\5cent.png")
+  Munt[7] = ImageList.LoadImage("C:\Portfolio\Small Basic\Munten en Biljetten teller\Images\2cent.png")
+  Munt[8] = ImageList.LoadImage("C:\Portfolio\Small Basic\Munten en Biljetten teller\Images\1cent.png")
+Endsub
+
+Sub berekening
+  If (bedrag <= 100)Then
+    x1a = Math.Remainder(bedrag, 500)
+    xb[1] = Math.Floor(bedrag/500)
+    x2a = Math.Remainder(x1a, 200)
+    xb[2] = Math.Floor (x1a/200)
+    x3a = Math.Remainder(x2a,100)
+    xb[3] = Math.Floor(x2a/100)
+    x4a = Math.Remainder(x3a, 50)
+    xb[4] = Math.Floor(x3a/50)
+    x5a = Math.Remainder(x4a, 20)
+    xb[5] = Math.Floor (x4a/20)
+    x6a = Math.Remainder(x5a,10)
+    xb[6] = Math.Floor(x5a/10)
+    x7a = Math.Remainder(x6a, 5)
+    xb[7] = Math.Floor(x6a/5)
+     x7a = x7a * 100
+    x1c = Math.Remainder(x7a, 200)
+    xc[1] = Math.Floor(x7a/200)
+    x2c = Math.Remainder(x1c, 100)
+    xc[2] = Math.Floor (x1c/100)
+    x3c = Math.Remainder(x2c,50)
+    xc[3] = Math.Floor(x2c/50)
+    x4c = Math.Remainder(x3c, 20)
+    xc[4] = Math.Floor(x3c/20)
+    x5c = Math.Remainder(x4c, 10)
+    xc[5] = Math.Floor (x4c/10)
+    x6c = Math.Remainder(x5c,5)
+    xc[6] = Math.Floor(x5c/5)
+    x7c = Math.Remainder(x6c, 2)
+    xc[7] = Math.Floor(x6c/2)
+    x8c = Math.Remainder(x7c, 1)
+    xc[8] = Math.Floor (x7c/1)  
+  Elseif (bedrag > 100)Then
+    xb[7] = 0
+    x1a = Math.Remainder(bedrag, 500)
+    xb[1] = Math.Floor(bedrag/500)
+    x2a = Math.Remainder(x1a, 200)
+    xb[2] = Math.Floor (x1a/200)
+    x3a = Math.Remainder(x2a,100)
+    xb[3] = Math.Floor(x2a/100)
+    x4a = Math.Remainder(x3a, 50)
+    xb[4] = Math.Floor(x3a/50)
+    x5a = Math.Remainder(x4a, 20)
+    xb[5] = Math.Floor (x4a/20)
+    x6a = Math.Remainder(x5a,10)
+    xb[6] = Math.Floor(x5a/10)
+       x6a  = x6a*100
+    x1c = Math.Remainder(x6a, 200)
+    xc[1] = Math.Floor(x6a/200)
+    x2c = Math.Remainder(x1c, 100)
+    xc[2] = Math.Floor (x1c/100)
+    x3c = Math.Remainder(x2c,50)
+    xc[3] = Math.Floor(x2c/50)
+    x4c = Math.Remainder(x3c, 20)
+    xc[4] = Math.Floor(x3c/20)
+    x5c = Math.Remainder(x4c, 10)
+    xc[5] = Math.Floor (x4c/10)
+    x6c = Math.Remainder(x5c,5)
+    xc[6] = Math.Floor(x5c/5)
+    x7c = Math.Remainder(x6c, 2)
+    xc[7] = Math.Floor(x6c/2)
+    x8c = Math.Remainder(x7c, 1)
+    xc[8] = Math.Floor (x7c/1) 
+  If (bedrag >= 1000)Then 
+    xb[1] = 1
+    bedrag2 = bedrag - 500
+    x2a = Math.Remainder(bedrag2, 200)
+    xb[2] = Math.Floor (bedrag2/200)
+    x3a = Math.Remainder(x2a,100)
+    xb[3] = Math.Floor(x2a/100)
+    x4a = Math.Remainder(x3a, 50)
+    xb[4] = Math.Floor(x3a/50)
+    x5a = Math.Remainder(x4a, 20)
+    xb[5] = Math.Floor (x4a/20)
+    x6a = Math.Remainder(x5a,10)
+    xb[6] = Math.Floor(x5a/10)
+       x6a  = x6a*100
+    x1c = Math.Remainder(x6a, 200)
+    xc[1] = Math.Floor(x6a/200)
+    x2c = Math.Remainder(x1c, 100)
+    xc[2] = Math.Floor (x1c/100)
+    x3c = Math.Remainder(x2c,50)
+    xc[3] = Math.Floor(x2c/50)
+    x4c = Math.Remainder(x3c, 20)
+    xc[4] = Math.Floor(x3c/20)
+    x5c = Math.Remainder(x4c, 10)
+    xc[5] = Math.Floor (x4c/10)
+    x6c = Math.Remainder(x5c,5)
+    xc[6] = Math.Floor(x5c/5)
+    x7c = Math.Remainder(x6c, 2)
+    xc[7] = Math.Floor(x6c/2)
+    x8c = Math.Remainder(x7c, 1)
+    xc[8] = Math.Floor (x7c/1) 
+  EndIf
+EndIf
+  doen()
+EndSub
+
+Sub berekening2
+  bedragtot = Controls.GetTextBoxText(totaal) + 0.0
+  bedragtot = bedragtot + bedrag 
+  Controls.SetTextBoxText(totaal, bedragtot)
+  File.WriteContents(fp2, bedragtot)
+  If (sommen > 0)Then
+    gem = Controls.GetTextBoxText(gemiddelde)  
+    gem = bedragtot/sommen
+    Controls.SetTextBoxText(gemiddelde, gem)
+    File.WriteContents(fp3, gem)
+  EndIf
+EndSub
+
+Sub checkmineen
+  If (Text.GetLength(bedrag) > 7)Then
+    cannot()
+  EndIf
+  If(Text.GetLength(bedrag) < 8)Then
+    check0()
+  EndIf
+EndSub
+
+
+Sub check0
+  For k = 1 To Text.GetLength(bedrag)
+    character[k] = Text.GetSubText(bedrag, k, 1)
+  EndFor
+  For k = 1 To Text.GetLength(bedrag)
+     charval[k] = Text.GetCharacterCode(character[k])
+   EndFor
+   For k = Text.GetLength(bedrag) To 1 Step -1 
+     If (charval[k] < 46  Or charval[k] > 57)Then
+       cannot()
+       k = 1
+     EndIf
+   EndFor
+   If (Text.GetLength(bedrag) = 1 and charval[1] > 45 And charval[1] < 58)Then
+     check1()
+   ElseIf (Text.GetLength(bedrag) = 2 and charval[1] > 45 And charval[1] < 58 And charval[2] > 45 And charval[2] < 58)Then
+     check1()
+   Elseif (Text.GetLength(bedrag) = 3 and charval[1] > 45 And charval[1] < 58 And charval[2] > 45 And charval[2] < 58 And charval[3] > 45 And charval[3] < 58)Then
+     check1()
+   ElseIf (Text.GetLength(bedrag) = 4 and charval[1] > 45 And charval[1] < 58 And charval[2] > 45 And charval[2] < 58 And charval[3] > 45 And charval[3] < 58 And charval[4] > 45 And charval[4] < 58)Then
+     check1()
+   ElseIf (Text.GetLength(bedrag) = 5 and charval[1] > 45 And charval[1] < 58 And charval[2] > 45 And charval[2] < 58 And charval[3] > 45 And charval[3] < 58 And charval[4] > 45 And charval[4] < 58 and charval[5] > 45 and charval[5] < 58)Then
+     check1()
+   ElseIf (Text.GetLength(bedrag) = 6 and charval[1] > 45 And charval[1] < 58 And charval[2] > 45 And charval[2] < 58 And charval[3] > 45 And charval[3] < 58 And charval[4] > 45 And charval[4] < 58 and charval[5] > 45 and charval[5] < 58 and charval[6] > 45 and charval[6] < 58)Then
+     check1()
+   ElseIf (Text.GetLength(bedrag) = 7 and charval[1] > 45 And charval[1] < 58 And charval[2] > 45 And charval[2] < 58 And charval[3] > 45 And charval[3] < 58 And charval[4] > 45 And charval[4] < 58 and charval[5] > 45 and charval[5] < 58 and charval[6] > 45 and charval[6] < 58 and charval[7] > 45 and charval[7] < 58)Then
+     check1()
+   EndIf
+ EndSub
+ 
+Sub check1
+  If (bedrag > 2021)Then
+    cannot()
+  ElseIf(bedrag <= 2021)Then
+    check2()
+  EndIf
+EndSub
+
+Sub check2
+  If (bedrag <> "")Then
+    sommen = sommen + 1
+    berekening()
+    berekening2()
+  EndIf
+EndSub
+
+Sub doen
+  GraphicsWindow.FontSize = 32
+  x = 1 
+  y = 250
+  delta = 220
+  b = 120
+  For i = 1 To 7
+    Euro[i] = Shapes.AddImage(Biljet[i])  
+    Aantal[i] = Shapes.AddText("x")
+    Text[i] = Shapes.AddText(xb[i])
+     If (xb[i] = 0)Then
+       Shapes.Remove(Euro[i]) 
+       Shapes.Remove(Aantal[i])
+       Shapes.Remove(Text[i])  
+     ElseIf(xb[i] > 0)Then
+      Shapes.Move(Euro[i], delta*x - b, y)
+      Shapes.Move(Aantal[i], delta*x - (b+25), y)
+      Shapes.Move(Text[i], delta*x - (b+65), y)
+      x = x + 1 
+    EndIf
+    If (x = 4)Then
+     y = 400
+     b = 780
+   EndIf
+ EndFor
+  x = 1 
+  y = 250
+  delta = 220
+  b = -500
+  For l = 1 To 8
+    Euros[l] = Shapes.AddImage(Munt[l])  
+    Aantals[l] = Shapes.AddText("x")
+    Texts[l] = Shapes.AddText(xc[l])
+     If (xc[l] = 0)Then
+       Shapes.Remove(Euros[l]) 
+       Shapes.Remove(Aantals[l])
+       Shapes.Remove(Texts[l])  
+     ElseIf(xc[l] > 0)Then
+      Shapes.Move(Euros[l], delta*x - b, y - 25)
+      Shapes.Move(Aantals[l], delta*x - (b+25), y)
+      Shapes.Move(Texts[l], delta*x - (b+65), y)
+      x = x + 1 
+    EndIf
+    If (x = 4)Then
+     y = 400
+     b = 165
+   EndIf
+   If ( x = 7)Then
+     y = 550
+     b = 165 + 660
+   EndIf
+ EndFor
+ 
+EndSub
+
+Sub reset
+   For i = 1 to 7
+      Shapes.Remove(Euro[i])
+      Shapes.Remove(Aantal[i])
+      Shapes.Remove(Text[i])
+    Endfor
+    For l = 1 To 8
+      Shapes.Remove(Euros[l])
+      Shapes.Remove(Aantals[l])
+      Shapes.Remove(Texts[l])
+    EndFor
+    Controls.SetTextBoxText(aanjal, 0)
+    Controls.SetTextBoxText(totaal, 0)
+    Controls.SetTextBoxText(gemiddelde, 0)
+    zero1 = Controls.GetTextBoxText(aanjal)
+    zero2 = Controls.GetTextBoxText(totaal)
+    zero3 = Controls.GetTextBoxText(gemiddelde)
+    File.WriteContents(fp1, zero1)
+    File.WriteContents(fp2, zero2)
+    File.WriteContents(fp3, zero3)
+    dingen3()
+EndSub
+   
+Sub cannot
+  GraphicsWindow.ShowMessage("Dit bedrag kan ik niet uitrekenen", "Whoops") 
+  dingen3()
+EndSub
+
+  

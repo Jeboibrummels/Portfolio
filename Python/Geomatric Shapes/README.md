@@ -3,7 +3,7 @@ Ruimtelijke figuren
 
 Dit was mijn eerste opdracht in python naast de opdrachten in het boek "Crash Course...". \
 De bedoeling van deze opdracht was om mij bekend te raken met de syntax van python en dingen \
-die ik nog niet kende vanuit Small Basic zoals classes en hun definities. \
+die ik nog niet kende vanuit Small Basic zoals classes en hun definities. 
 
 
 Opdracht
@@ -96,7 +96,7 @@ Werkwijze
 ----
 
 Taal: Python \
-Libraries: Tkinter, Pillow, math
+Libraries: Tkinter, Pillow, math \
 Tools: Paint
 
 Voor dit project is de weergave gedaan door tkinter. Tkinter is goed voor 2D grafische weergave \
@@ -106,18 +106,18 @@ Met tkinter is het mogelijk om buttons, labels en entry's op het scherm te plaas
 functionaliteit hebben. Om een duidelijke structuur in de layout te krijgen heb ik eerst een grid \
 gemaakt waar je dan de zoganaamde widgets in kan plaatsen zonder dat je met x- en y- waarden aan \
 de gang hoeft te gaan. In plaats daavan je de rij en de kolom kiezen waar je een bepaalde widget \
-wil plaatsen.
+wil plaatsen. \
 Ik wilde graag een interface waarin je kan scrollen tussen de pagina's. Dit heb ik gedaan door \
-bepaalde widgets op het scherm te plaatsen en deze te binden aan een bepaalde pagina met een if-then-else\ 
-constructie. Als de pagina verandert door op één van de pijlen te klikken veranderen ook de widgets \
-die op dat moment op het scherm zichtbaar zijn. 
+bepaalde widgets op het scherm te plaatsen en deze te binden aan een bepaalde pagina met een  \
+if-then-else constructie. Als de pagina verandert door op één van de pijlen te klikken veranderen \
+ook de widgets die op dat moment op het scherm zichtbaar zijn. \
 Wanneer je op een button klikt met een bepaald figuur opent een nieuw scherm. De hoofdinterface \
 verdwijnt dan. Hier in dit scherm zijn er meerdere dingen. Als eerste is er een back button. Deze \
 button brengt je terug naar de hoofdinterface waarvan hij ook de pagina heeft onthouden waar je vandaan \
 komt. Verder zijn er invoer widgets, door alle invoer widgets in te vullen zal er een berekening plaats \
 vinden die de weergegeven worden in de uitvoer van deze figuur. Dit gebeurt onmiddelijk, zolang alle \
 invoervelden maar ingevuld zijn. Wanneer je met de muis over de labels heen gaat (zonder te klikken) \
-wordt er grafisch weergegeven om welke eigenschap van het figuur het gaat door middel van een kleur.
+wordt er grafisch weergegeven om welke eigenschap van het figuur het gaat door middel van een kleur. \
 Dit is gedaan door de muis-events (in dit geval hover) te binden aan bepaalde widgets. Er is geprogrammeerd \
 wat er gebeurt als de muis hovert over de label, en wanneer de muis niet hovert over de label. \
 Dit om de figuur weer terug te brengen in de originele staat wanneer er niet gehoverd wordt over \

@@ -339,7 +339,6 @@ class APP:
                             piece.active = True
 
                     # event handeling for play again and main menu button in pop up if game ends
-
                     if PiecesV10.draw \
                             or PiecesV10.stale_mate \
                             or PiecesV10.fifty_move_draw \

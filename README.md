@@ -27,13 +27,13 @@ Om wat verder kennis te maken met python heb ik toen een klein projectje gedaan 
 waarin je met wat invoer bepaalde eigenschappen van geometrische vormen zoals een kubus kan berekenen. \
 Mijn laatste project was op eigen initiatief een schaakspel maken. Dit vond ik een erg leuke uitdaging, \
 hiervan had ik vantevoren de tijd iets langer ingeschat dan ik er daadwerkelijk mee bezig was, maar ik heb \
-thuis ook veel hieraan gewerkt. \
+thuis ook veel hieraan gewerkt. 
 
-Voordat ik naar het REA-college kwam heb ik een aantal scholen geprobeerd. Zo heb ik twee jaar de opleiding \
-Chemie gedaan op de Hanze Hogeschool, en een jaar Wiskunde op NHL in Leeuwarden. Beide heb ik niet afgemaakt. \
+Voordat ik naar het REA-college kwam heb ik een aantal opleidingen geprobeerd. Zo heb ik twee jaar de opleiding \
+Chemie gedaan op de Hanze Hogeschool en een jaar Wiskunde op NHL in Leeuwarden. Beide heb ik niet afgemaakt. \
 ik ben in het bezit van een havo-diploma. Mijn doel is om dit jaar aan het werk te komen en om in september \
-een deeltijdstudie ICT te beginnen aan de Hanze Hogeschool in Groningen om toch nog eeen hbo-diploma te halen.
-
+een deeltijdstudie ICT te beginnen aan de Hanze Hogeschool in Groningen. Dit omdat ik toch nog graag een\
+hbo-dimploma wil halen.
 
 
 
